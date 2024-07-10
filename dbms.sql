@@ -1,47 +1,31 @@
 CREATE DATABASE student;
-USE student;
+use student;
 
-CREATE TABLE Author
-(
-    Aid INT PRIMARY KEY,
-    Name VARCHAR(20) NOT NULL,
-    Age INT CHECK (Age > 10),
-    Gender VARCHAR(7) DEFAULT 'UNKNOWN',
-    Address VARCHAR(50)
+CREATE TABLE students(
+std_id INT PRIMARY KEY,
+std_name VARCHAR(20),
+std_address VARCHAR(20),
+dept_id INT,
+age INT
 );
 
-INSERT INTO Author (Aid, Name, Age, Gender, Address)
-VALUES
-    (1001, 'John Smith', 45, 'Male', '123 Elm St'),
-    (1002, 'Jane Doe', 38, 'Female', '456 Maple Ave'),
-    (1003, 'Sam Brown', 55, 'Male', '789 Oak Blvd'),
-    (1004, 'Lisa White', 29, 'Female', '321 Pine Rd');
+INSERT INTO students VALUES
+(10, 'Maya', 'Palpa', 1, 21),
+(11, 'Hari', 'ktm', 2, 22),
+(12, 'Ram', 'ktm', 1, 19),
+(13, 'Sira', 'ktm', 3, 33),
+(14, 'Pinky', 'Palpa', 4, 23),
+(15, 'Gita', 'Pokhara', 2, 22),
+(16, 'Rita', 'ktm', 1, 49);
 
+SELECT std_name, std_address FROM students;
 
+SELECT std_name, std_address FROM students WHERE dept_id = 1;
 
-DROP TABLE Author;
+SELECT std_name, std_address FROM students WHERE std_address = 'ktm';
 
-CREATE TABLE Writes
-(
-    Aid INT,
-    Bid INT PRIMARY KEY,
-    Publishdate DATE,
-    Age INT CHECK (Age > 10),
-    Gender VARCHAR(7) DEFAULT 'UNKNOWN',
-    Bookname VARCHAR(20),
-    ISBN VARCHAR(20) NOT NULL,
-    FOREIGN KEY (Aid) REFERENCES Author (Aid)
-);
+SELECT std_name, std_address FROM students WHERE std_address != 'ktm';
 
-INSERT INTO Writes (Aid, Bid, Publishdate, Age, Gender, Bookname, ISBN)
-VALUES
-    (1001, 2001, '2023-01-15', 45, 'Male', 'The Great Adventure', '1234567890123'),
-    (1002, 2002, '2022-07-23', 38, 'Female', 'Mystery of the Night', '2345678901234'),
-    (1003, 2003, '2021-11-30', 55, 'Male', 'History Unveiled', '3456789012345'),
-    (1004, 2004, '2020-05-20', 29, 'Female', 'Romance in Paris', '4567890123456');
+SELECT std_name, dept_id FROM students WHERE (dept_id > 2);
 
-
-
-SELECT * FROM Author;
-SELECT * FROM Writes;
-
+SELECT std_name, dept_id FROM students WHERE (dept_id >= 2);
