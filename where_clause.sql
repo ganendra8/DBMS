@@ -23,3 +23,12 @@ SELECT std_name, std_address FROM students;
 SELECT std_name, std_address FROM students WHERE dept_id = 1;
 
 SELECT std_name, std_address FROM students WHERE std_address = 'ktm';
+
+SELECT std_name, std_address FROM students WHERE std_address != 'ktm';
+
+SELECT std_name, dept_id FROM students WHERE (dept_id > 2);
+
+SELECT std_name, dept_id FROM students WHERE (dept_id >= 2);
+
+SELECT std_name, dept_id From students WHERE std_address = 'ktm' AND dept_id <> 1; -- <> not equal sign
+
