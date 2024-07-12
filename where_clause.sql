@@ -64,4 +64,4 @@ SELECT AVG(dept_block_no) AS 'block_average' From Department WHERE dept_id > 3;
 
 SELECT COUNT(*) AS Tot_depart FROM Department;
 
--- PAGE 178 
+SELECT COUNT(dept_id) AS 'No of Department' FROM Department WHERE dept_name LIKE "%S";
