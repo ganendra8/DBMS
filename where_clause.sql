@@ -51,3 +51,17 @@ INSERT INTO Department VALUES
 (5,'Phycics', 500);
 
 SELECT dept_id AS id, dept_block_no AS "block_no" FROM Department;
+
+-- Find the maximum and minimum of dept_id
+
+SELECT MAX(dept_id), MIN(dept_id) FROM Department;
+
+-- Find average of department_block whose id is less than 3
+
+SELECT AVG(dept_block_no) AS 'block_average' From Department WHERE dept_id > 3;
+
+-- Find total no of department and alias the column as Tot_depart
+
+SELECT COUNT(*) AS Tot_depart FROM Department;
+
+-- PAGE 178 
