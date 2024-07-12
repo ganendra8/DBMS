@@ -33,4 +33,5 @@ SELECT std_name, dept_id FROM students WHERE (dept_id >= 2);
 
 -- Logical AND operator
 SELECT std_name, dept_id From students WHERE std_address = 'ktm' AND dept_id <> 1; -- <> not equal sign
-
+SELECT std_id, std_name, dept_id FROM students WHERE stD_address = 'ktm' ORDER BY std_name ASC;
+SELECT std_id, std_name, dept_id FROM students WHERE stD_address = 'ktm' ORDER BY std_name DESC;
