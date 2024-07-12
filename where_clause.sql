@@ -35,3 +35,19 @@ SELECT std_name, dept_id FROM students WHERE (dept_id >= 2);
 SELECT std_name, dept_id From students WHERE std_address = 'ktm' AND dept_id <> 1; -- <> not equal sign
 SELECT std_id, std_name, dept_id FROM students WHERE stD_address = 'ktm' ORDER BY std_name ASC;
 SELECT std_id, std_name, dept_id FROM students WHERE stD_address = 'ktm' ORDER BY std_name DESC;
+
+
+CREATE TABLE Department(
+dept_id INT,
+dept_name VARCHAR(255),
+dept_block_no INT
+);
+
+INSERT INTO Department VALUES
+(1,'Computer', 100),
+(2,'Mahematics', 200),
+(3,'Economics', 300),
+(4,'Account', 400),
+(5,'Phycics', 500);
+
+SELECT dept_id AS id, dept_block_no AS "block_no" FROM Department;
