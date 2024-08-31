@@ -1,7 +1,7 @@
+/*
+-- Assignment-1
 CREATE DATABASE ASSIGNMENT;
 USE ASSIGNMENT;
-
--- Assignment 1
 
 CREATE TABLE Emp
 (
@@ -15,13 +15,20 @@ DESC Emp;
 
 INSERT INTO Emp(Act_NO, name, DOB, Phone_no) VALUES
 (1, 'Suyog Magar', '2001-01-14', 9771723849),
-(2, 'Bedraj Khadka', '2000-03-23', 982482404),
-(3, 'Prayas Baral', '2001-02-02', 9712394736);
+(2, 'Bedraj Khadka', '2000-03-23', 9824824014),
+(3, 'Prayas Baral', '2001-02-02', 9712394736),
+(4, 'Op', '2000-02-12', 974894736),
+(5, 'Sushan Gautam', '2004-04-02', 9887548965);
+
 
 SELECT * FROM Emp;
+*/
 
--- Assignment 2
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
 
+/*
+-- Assignment-2
 CREATE TABLE dept(
 dept_no INT PRIMARY KEY,
 dname VARCHAR(30),
@@ -42,7 +49,13 @@ DESC department;
 DROP TABLE department;
 DESC department;
 
--- Assignment 3
+*/
+
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
+
+/*
+-- Assignment-3
 
 CREATE DATABASE company;
 use company;
@@ -101,9 +114,16 @@ SELECT * FROM company,dept,pay;
 
 UPDATE company SET emp_name = 'Hari' WHERE emp_id = 2;
 SELECT * FROM company,dept,pay;
-ROLLBACK;
 
--- Assignment 4 --
+ROLLBACK ;
+*/
+
+
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
+
+/*
+-- Assignment-4
 
 CREATE TABLE employee(
     fname VARCHAR(50), 
@@ -167,11 +187,11 @@ CREATE TABLE dependent(
 DESC dependent;
 
 INSERT INTO employee VALUES 
-('John', 'D', 'Doe', '1234567', '1990-05-01', '123 Main St', 'M', 50000, '98543222', 1),
-('Jane', 'M', 'Smith', '9834567', '1985-08-15', '456 Elm St', 'F', 60000, '33443222', 2),
-('David', 'S', 'Johnson', '5544567', '1992-12-10', '789 Oak St', 'M', 55000, '9876432', 1),
-('Sarah', 'K', 'Brown', '222333444', '1991-03-25', '321 Maple St', 'F', 45000, '33325522', 2),
-('Michael', 'R', 'Davies', '44455556', '1998-11-18', '987 Fine St', 'M', 70000, '5546733', 3);
+('Suyog', 'D', 'Mgr', '5879428', '1999-08-01', 'kdb', 'M', 50000, '98543222', 1),
+('Prayas', 'M', 'Baral', '9457867', '1988-08-15', 'ktm', 'F', 60000, '33443222', 2),
+('Bed', 'S', 'Raj', '5786482', '1990-12-01', 'kdb', 'M', 55000, '9876432', 1),
+('OM', 'K', 'Brown', '58796478', '1992-07-05', 'ktm', 'F', 45000, '33325522', 2),
+('Dipendra', 'R', 'Davies', '4567897', '1988-01-18', 'ktm', 'M', 70000, '5546733', 3);
 
 SELECT * FROM employee;
 
@@ -259,8 +279,12 @@ SELECT pno AS pnumber, COUNT(*) AS num_employees
 FROM works_on
 GROUP BY pno;
 
+*/
 
--- Assignment 5 --
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
+/*
+-- Assignment-5
 
 CREATE DATABASE complex;
 USE complex;
@@ -276,7 +300,17 @@ CREATE TABLE employee(
     branch_id INT
 );
 
-DESC employee;
+INSERT INTO employee VALUES
+(100, 'Suyog', 'Wallace', '1966-01-18', 'M', 250000, NULL, NULL),
+(101, 'Rita', 'Levinson', '1962-08-21', 'F', 110000, 100, 1),
+(102, 'Bed', 'Scott', '1963-11-25', 'M', 75000, 100, NULL),
+(103, 'Prakati', 'Martin', '1972-06-25', 'F', 63000, 102, 2),
+(104, 'Samjhana', 'Kapoor', '1981-02-05', 'F', 55000, 102, 2),
+(105, 'Pras', 'Hudson', '1959-04-19', 'M', 69000, 102, 2),
+(106, 'OP', 'Porter', '1969-10-05', 'M', 78000, 100, NULL),
+(107, 'Saurav', 'Bernard', '1971-07-22', 'M', 65000, 106, 3),
+(108, 'Hari', 'Halpert', '1977-10-01', 'M', 71000, 106, 3);
+
 
 CREATE TABLE branch(
     branch_id INT PRIMARY KEY,
@@ -284,12 +318,18 @@ CREATE TABLE branch(
     mgr_id INT,
     mgr_start_date DATE,
     FOREIGN KEY(mgr_id)
-    REFERENCES employee(emp_id) ON
-    DELETE SET NULL
+    REFERENCES employee(emp_id) ON DELETE SET NULL
 );
 
+INSERT INTO branch VALUES
+(1, 'Corporate', 100, '2006-02-09'),
+(2, 'Scranton', 102, '1992-04-06'),
+(3, 'Stamford', 106, '1998-02-13');
+
+SELECT * FROM branch;
+
 CREATE TABLE client(
-    client_id INT PRIMARY KEY,	
+    client_id INT PRIMARY KEY,    
     client_name VARCHAR(40),
     branch_id INT,
     FOREIGN KEY (branch_id)
@@ -297,12 +337,10 @@ CREATE TABLE client(
     ON DELETE SET NULL
 );
 
-DESC client;
-
 CREATE TABLE works_with(
     emp_id INT,
     client_id INT,
-    total_sales INT,	
+    total_sales INT,    
     PRIMARY KEY(emp_id, client_id),
     FOREIGN KEY(emp_id)
     REFERENCES employee(emp_id)
@@ -312,7 +350,6 @@ CREATE TABLE works_with(
     ON DELETE CASCADE
 );
 
-DESC works_with;
 
 CREATE TABLE branch_suppliers(
     branch_id INT,
@@ -324,57 +361,14 @@ CREATE TABLE branch_suppliers(
     ON DELETE CASCADE
 );
 
-DESC branch_suppliers;
-
-ALTER TABLE employee 
-ADD FOREIGN KEY(branch_id)
-REFERENCES branch(branch_id)	
-ON DELETE SET NULL;
-
-DESC employee;
-
-ALTER TABLE employee 
-ADD FOREIGN KEY(super_id)
-REFERENCES employee(emp_id)
-ON DELETE SET NULL;
-
-INSERT INTO employee VALUES
-(100, 'David', 'Wallace', '1967-11-17', 'M', 250000, NULL, NULL),
-(101, 'Jan', 'Levinson', '1961-05-11', 'F', 110000, 100, 1),
-(102, 'Michael', 'Scott', '1964-03-15', 'M', 75000, 100, NULL),
-(103, 'Angela', 'Martin', '1971-06-25', 'F', 63000, 102, 2),
-(104, 'Kelly', 'Kapoor', '1980-02-05', 'F', 55000, 102, 2),
-(105, 'Stanley', 'Hudson', '1958-02-19', 'M', 69000, 102, 2),
-(106, 'Josh', 'Porter', '1969-09-05', 'M', 78000, 100, NULL),
-(107, 'Andy', 'Bernard', '1973-07-22', 'M', 65000, 106, 3),
-(108, 'Jim', 'Halpert', '1978-10-01', 'M', 71000, 106, 3);
-
-INSERT INTO branch VALUES
-(1, 'Corporate', 100, '2006-02-09'),
-(2, 'Scranton', 102, '1992-04-06'),
-(3, 'Stamford', 106, '1998-02-13');
-
-INSERT INTO branch_suppliers VALUES
-(2, 'Hammer Mill', 'Paper'),
-(2, 'Uni-ball', 'Writing Utensils'),
-(3, 'Patriot Paper', 'Paper'),
-(2, 'J.T. Forms & Labels', 'Custom Forms'),
-(3, 'Uni-ball', 'Writing Utensils'),
-(3, 'Hammer Mill', 'Paper'),
-(3, 'Stamford Lables', 'Custom Forms');
-
-SELECT * FROM branch_suppliers;
-
 INSERT INTO client VALUES
 (400, 'Dunmore Highschool', 2),
-(401, 'Lackawana Country', 2),
+(401, 'Lackawana County', 2),
 (402, 'FedEx', 3),
 (403, 'John Daly Law, LLC', 3),
 (404, 'Scranton Whitepages', 2),
 (405, 'Times Newspaper', 3),
 (406, 'FedEx', 2);
-
-SELECT * FROM client;
 
 INSERT INTO works_with VALUES
 (105, 400, 55000),
@@ -387,10 +381,30 @@ INSERT INTO works_with VALUES
 (102, 406, 15000),
 (105, 406, 130000);
 
+INSERT INTO branch_suppliers VALUES
+(2, 'Hammer Mill', 'Paper'),
+(2, 'Uni-ball', 'Writing Utensils'),
+(3, 'Patriot Paper', 'Paper'),
+(2, 'J.T. Forms & Labels', 'Custom Forms'),
+(3, 'Uni-ball', 'Writing Utensils'),
+(3, 'Hammer Mill', 'Paper'),
+(3, 'Stamford Labels', 'Custom Forms');
+
+ALTER TABLE employee 
+ADD FOREIGN KEY(branch_id)
+REFERENCES branch(branch_id)    
+ON DELETE SET NULL;
+
+ALTER TABLE employee 
+ADD FOREIGN KEY(super_id)
+REFERENCES employee(emp_id)
+ON DELETE SET NULL;
 SELECT * FROM works_with;
 
-SELECT * FROM employee
-ORDER BY sex, first_name, last_name;
+SELECT * FROM branch_suppliers;
+
+SELECT * FROM client;
+SELECT * FROM employee ORDER BY sex, first_name, last_name;
 
 SELECT first_name, last_name
 FROM employee;
@@ -419,33 +433,32 @@ GROUP BY sex;
 SELECT SUM(total_sales), client_id
 FROM works_with
 GROUP BY client_id;
+*/
 
--- Assignment 6 --
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
 
--- Step 1: Find any client’s who are an LLC.
+/*
+-- Assignment-6
+
 SELECT * FROM client WHERE client_name LIKE '%LLC';
 
--- Step 2: Find any employee born in October.
 SELECT * FROM employee WHERE birth_day LIKE '____-10%';
 
--- Step 3: Find a list of employee and branch names
 SELECT first_name FROM employee
 UNION
 SELECT branch_name FROM branch
 UNION
 SELECT client_name FROM client;
 
--- Step 4: Find all the list of all clients & branch suppliers names.
 SELECT client_name, branch_id FROM client
 UNION
 SELECT supplier_name, branch_id FROM branch_suppliers;
 
--- Step 5: Find a list of all money spent or earned by the company.
 SELECT salary FROM employee
 UNION
 SELECT total_sales FROM works_with;
 
--- Step 6: Find names of all employees who have sold over 30,000 to a single client.
 SELECT employee.first_name, employee.last_name
 FROM employee
 WHERE employee.emp_id IN (
@@ -454,10 +467,6 @@ WHERE employee.emp_id IN (
    WHERE works_with.total_sales > 30000
 );
 
--- Lab - 7 Title : View
--- Introduction: Create a view table with emp_id, firstname,lastname,salary,department:
-
--- Create table employees
 CREATE TABLE employees (
     emp_id INT PRIMARY KEY,
     firstname VARCHAR(200),
@@ -466,7 +475,7 @@ CREATE TABLE employees (
     department VARCHAR(200)
 );
 
--- Insert values into the underlying table
+
 INSERT INTO employees (emp_id, firstname, lastname, salary, department) VALUES
 (1, 'John', 'Doe', 50000, 'IT'),
 (2, 'Jane', 'Smith', 60000, 'Sales'),
@@ -474,7 +483,6 @@ INSERT INTO employees (emp_id, firstname, lastname, salary, department) VALUES
 
 SELECT * FROM employees;
 
--- Create the view
 CREATE VIEW employe_view AS
 SELECT emp_id, firstname, lastname, salary
 FROM employees
@@ -482,7 +490,6 @@ WHERE department = 'IT';
 
 SELECT * FROM employe_view;
 
--- Update view
 CREATE OR REPLACE VIEW employe_view AS
 SELECT emp_id, firstname, lastname, salary
 FROM employees
@@ -490,13 +497,19 @@ WHERE department = 'IT';
 
 SELECT * FROM employe_view;
 
--- Drop the view
 DROP VIEW employe_view;
 
+*/
 
--- Assignment 7 --
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
 
--- Create table employees
+/*
+-- Assignment-7
+
+CREATE DATABASE employe;
+USE employe;
+drop database employe;
 CREATE TABLE employees (
     emp_id INT PRIMARY KEY,
     firstname VARCHAR(200),
@@ -505,72 +518,67 @@ CREATE TABLE employees (
     department VARCHAR(200)
 );
 
--- Insert values into the underlying table
-INSERT INTO employees (emp_id, firstname, lastname, salary, department) VALUES
-(1, 'John', 'Doe', 50000, 'IT'),
-(2, 'Jane', 'Smith', 60000, 'Sales'),
-(3, 'Alice', 'Johnson', 55000, 'Marketing');
 
--- Select all records from employees table
+INSERT INTO employees (emp_id, firstname, lastname, salary, department) VALUES
+(1, 'Suyog', 'Magar', 50000, 'IT'),
+(2, 'Sita', 'Rana', 60000, 'Sales'),
+(3, 'Pras', 'Baral', 55000, 'Marketing');
+
+
 SELECT * FROM employees;
 
--- Create the view
-CREATE VIEW employe_view AS
+
+CREATE VIEW employee_view AS
 SELECT emp_id, firstname, lastname, salary
 FROM employees
 WHERE department = 'IT';
 
--- Select all records from the view
-SELECT * FROM employe_view;
+SELECT * FROM employee_view;
 
--- Update the view
-CREATE OR REPLACE VIEW employe_view AS
+CREATE OR REPLACE VIEW employee_view AS
 SELECT emp_id, firstname, lastname, salary
 FROM employees
 WHERE department = 'IT';
 
--- Select all records from the updated view
-SELECT * FROM employe_view;
+SELECT * FROM employee_view;
 
--- Drop the view
-DROP VIEW employe_view;
+DROP VIEW employee_view;
 
+*/
 
--- Assignment 8 -- 
+-- ---------------------------------------------------------------------- --
+-- ---------------------------------------------------------------------- --
 
--- Create the trigger_test table
+/*
+-- Assignment-8
+use employe;
 CREATE TABLE trigger_test (
     message VARCHAR(100)
 );
 
--- Changing delimiter to allow for trigger definition
-DELIMITER $$
+-- DELIMITER $$
 
--- Create the first trigger that inserts a fixed message into trigger_test
 CREATE TRIGGER my_trigger BEFORE INSERT
-ON employee
+ON employees
 FOR EACH ROW
 BEGIN
     INSERT INTO trigger_test VALUES ('added new employee');
 END$$
 
--- Revert delimiter back to default
-DELIMITER ;
+-- DELIMITER ;
 
--- Insert a new employee to trigger the first trigger
-INSERT INTO employee
-VALUES (109, 'Oscar', 'Martinez', '1979-02-27', 'M', 69000, NULL, NULL);
+INSERT INTO employees
+VALUES (109, 'Suyog', 'Rana', 69000, 'IT');
 
--- Select from trigger_test to see the result of the trigger
 SELECT * FROM trigger_test;
 
--- Select from employee to see the new employee record
-SELECT * FROM employee;
 
--- Changing delimiter to allow for trigger definition
-DELIMITER $$
+SELECT * FROM employees;
 
--- Create a second trigger that inserts the first name of the new employee into trigger_test
+
+-- DELIMITER $$
+
+
 CREATE TRIGGER my_trigger1 BEFORE INSERT
 ON employee
 FOR EACH ROW
@@ -578,16 +586,15 @@ BEGIN
     INSERT INTO trigger_test VALUES (NEW.first_name);
 END$$
 
--- Revert delimiter back to default
-DELIMITER ;
+-- DELIMITER ;
 
--- Select from trigger_test to see the result of both triggers
+
 SELECT * FROM trigger_test;
 
--- Insert another new employee to trigger both triggers
-INSERT INTO employee
-VALUES (110, 'Kevin', 'Malone', '1968-06-01', 'M', 69000, NULL, NULL);
+INSERT INTO employees
+VALUES (110, 'Kevin', 'Malone', 69000, 'IT');
 
--- Select from employee to see the new employee record
-SELECT * FROM employee;
 
+SELECT * FROM employees;
+
+*/
